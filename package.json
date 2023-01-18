@@ -4,7 +4,8 @@
   "description": "a version of the famous snake game in JS",
   "main": "index.js",
   "scripts": {
-    "test": "npx jasmine"
+    "test": "npx jasmine",
+    "build": "webpack --mode=production"
   },
   "keywords": [
     "game",
@@ -16,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "jasmine": "^4.3.0",
-    "webpack": "^5.75.0"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }
