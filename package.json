@@ -1,0 +1,21 @@
+{
+  "name": "snake-game",
+  "version": "1.0.0",
+  "description": "a version of the famous snake game in JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jasmine"
+  },
+  "keywords": [
+    "game",
+    "snake",
+    "javascript",
+    "vanilla"
+  ],
+  "author": "Victor Lia Fook",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^4.3.0",
+    "webpack": "^5.75.0"
+  }
+}
