@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx jasmine",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "serve": "browser-sync start --server"
   },
   "keywords": [
     "game",
@@ -16,8 +17,12 @@
   "author": "Victor Lia Fook",
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2.27.11",
     "jasmine": "^4.3.0",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "p5": "^1.5.0"
   }
 }
