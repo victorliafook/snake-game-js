@@ -88,6 +88,47 @@ describe('Snake class tests', () => {
     expect(snake.isAlive()).toBeTrue();
   });
 
+  it('snake loops when going off-boundaries', () => {
+    const initialState = {
+      length: 3,
+      maxHorizontal: 10, maxVertical: 10
+    };
+
+    initialState.head = {
+      x: 0, y: 9
+    };
+    let snake = new Snake(initialState);
+    snake.move('up');
+    expect(snake.getSegments()).toEqual(
+      [{x: 0, y: 8}, {x: 0, y: 9}, {x: 0, y: 0}]
+    );
+
+    snake = new Snake(initialState);
+    snake.move('left');
+    expect(snake.getLength()).toEqual(initialState.length);
+    expect(snake.getSegments()).toEqual(
+      [{x: 0, y: 8}, {x: 0, y: 9}, {x: 9, y: 9}]
+    );
+
+    initialState.head = {
+      x: 9, y: 0
+    };
+    snake = new Snake(initialState);
+    snake.move('left');
+    snake.move('down');
+    expect(snake.getLength()).toEqual(initialState.length);
+    expect(snake.getSegments()).toEqual(
+      [{x: 9, y: 0}, {x: 8, y: 0}, {x: 8, y: 9}]
+    );
+
+    snake = new Snake(initialState);
+    snake.move('right');
+    expect(snake.getLength()).toEqual(initialState.length);
+    expect(snake.getSegments()).toEqual(
+      [{x: 9, y: 9}, {x: 9, y: 0}, {x: 0, y: 0}]
+    );
+  });
+
   it('snake dies when it hits itself', () => {
     const initialState = {
       length: 5,

@@ -1,7 +1,7 @@
 function Snake(config = {}) {
-  const head = {
-    x: 5, y: 5
-  };
+  const head = {...(config.head ?? {x: 5, y: 5})} 
+
+  const { maxHorizontal, maxVertical } = config;
 
   const snakeSegments = [];
 
@@ -24,9 +24,10 @@ function Snake(config = {}) {
 
   this.move = (direction) => {
     const movement = movements[direction];
+    const newCoords = getParameterisedCoords(head.x + movement.x, head.y + movement.y);
+    setHead(newCoords.x, newCoords.y);
 
-    head.x += movement.x, head.y += movement.y;
-    alive = didItHitItSelf() === false;
+    alive = this.isSnake(head.x, head.y) === false;
   
     updateCoordinates();
     updateSegments();
@@ -38,13 +39,18 @@ function Snake(config = {}) {
     return snakeSegments;
   };
 
-  initialiseSnake(this);
-
-  function didItHitItSelf() {
-    if (coordinateMap.get(head.x) === undefined) {
+  this.isSnake = (x, y) => {
+    if (coordinateMap.get(x) === undefined) {
       return false;
     }
-    return coordinateMap.get(head.x).has(head.y);
+    return coordinateMap.get(x).has(y);
+  };
+
+  initialiseSnake(this);
+
+  function setHead(x, y) {
+    head.x = x;
+    head.y = y;
   }
 
   function updateCoordinates() {
@@ -56,7 +62,6 @@ function Snake(config = {}) {
     snakeSegments.push({... head});
     const tail = snakeSegments.shift();
 
-    //console.info(tail, coordinateMap)
     coordinateMap.get(tail.x).delete(tail.y);
   }
 
@@ -72,12 +77,34 @@ function Snake(config = {}) {
     yCoords.add(head.y);
     snakeSegments.push({x: head.x, y:head.y});
     for(let i = 1; i < snake.getLength(); i++) {
-      yCoords.add(head.y - i);
-      snakeSegments.unshift({x: head.x, y: head.y - i});
+      const coords = getParameterisedCoords(head.x, head.y - i);
+      yCoords.add(coords.y);
+      snakeSegments.unshift(coords);
     }
 
     coordinateMap.set(head.x, yCoords);
   };
+
+  function getParameterisedCoords(x, y) {
+    const coords = {x, y};
+    if (x < 0) { 
+      coords.x = maxHorizontal - 1;
+    }
+
+    if (y < 0) { 
+      coords.y = maxVertical - 1;
+    }
+
+    if (x >= maxHorizontal) { 
+      coords.x = 0;
+    }
+
+    if (y >= maxVertical) { 
+      coords.y = 0;
+    }
+
+    return coords;
+  }
 }
 
 module.exports = Snake;
