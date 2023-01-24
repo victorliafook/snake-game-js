@@ -1,17 +1,17 @@
 function Snake(config = {}) {
   const head = {...(config.head ?? {x: 5, y: 5})} 
-
   const { maxHorizontal, maxVertical } = config;
+  let field = null;
 
   const snakeSegments = [];
 
-  let length = config.length ?? 3;
+  const initialLength = config.length ?? 3;
   let alive = true;
 
   const coordinateMap = new Map();
 
   this.getLength = () => {
-    return length;
+    return snakeSegments.length;
   };
 
   this.getHead = () => {
@@ -46,7 +46,16 @@ function Snake(config = {}) {
     return coordinateMap.get(x).has(y);
   };
 
+  this.setField = (inputField) => {
+    field = inputField;
+  };
+
   initialiseSnake(this);
+
+  function hasFood(x, y) {
+    if (field === null) return false;
+    return field.hasFood(x, y);
+  }
 
   function setHead(x, y) {
     head.x = x;
@@ -59,10 +68,14 @@ function Snake(config = {}) {
   }
 
   function updateSegments() {
-    snakeSegments.push({... head});
-    const tail = snakeSegments.shift();
+    snakeSegments.push({ ...head });
 
-    coordinateMap.get(tail.x).delete(tail.y);
+    if (hasFood(head.x, head.y)) {
+      field.eatFood();
+    } else {
+      const tail = snakeSegments.shift();
+      coordinateMap.get(tail.x).delete(tail.y);
+    }
   }
 
   const movements = {
@@ -76,7 +89,7 @@ function Snake(config = {}) {
     const yCoords = new Set();
     yCoords.add(head.y);
     snakeSegments.push({x: head.x, y:head.y});
-    for(let i = 1; i < snake.getLength(); i++) {
+    for(let i = 1; i < initialLength; i++) {
       const coords = getParameterisedCoords(head.x, head.y - i);
       yCoords.add(coords.y);
       snakeSegments.unshift(coords);

@@ -129,6 +129,32 @@ describe('Snake class tests', () => {
     );
   });
 
+  it('grows when eats food', () => {
+    const initialState = {
+      length: 1,
+      maxHorizontal: 10, maxVertical: 10
+    };
+
+    initialState.head = {
+      x: 0, y: 0
+    };
+
+    const fieldMock = {
+      eatFood: () => {},
+      hasFood: () => {},
+    };
+    spyOn(fieldMock, 'hasFood').and.returnValue(true);
+    spyOn(fieldMock, 'eatFood');
+    let snake = new Snake(initialState);
+    snake.setField(fieldMock);
+    snake.move('up');
+    
+    expect(fieldMock.hasFood).toHaveBeenCalledWith(0, 1);
+    expect(fieldMock.eatFood).toHaveBeenCalledTimes(1);
+    expect(snake.getLength()).toEqual(2);
+    expect(snake.getSegments()[0]).toEqual({x: 0, y: 0});
+  });
+
   it('snake dies when it hits itself', () => {
     const initialState = {
       length: 5,

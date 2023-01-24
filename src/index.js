@@ -29,6 +29,7 @@ new p5(function(closure) {
   const snakeField = new Field(closure, {width: 50, height: 50});
   const snake = new Snake({maxHorizontal: 50, maxVertical: 50});
   snakeField.setSnake(snake);
+  snake.setField(snakeField);
 
   closure.setup = () => {
     closure.createCanvas(500, 500);
