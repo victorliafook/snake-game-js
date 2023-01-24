@@ -9,13 +9,13 @@ const game = {
 window.addEventListener('keydown', (event) => {
   switch(event.key) {
     case 'ArrowUp':
-      game.direction = 'up';
+      game.direction = 'down';
       break;
     case 'ArrowLeft':
       game.direction = 'left';
       break;
     case 'ArrowDown':
-      game.direction = 'down';
+      game.direction = 'up';
       break;
     case 'ArrowRight':
       game.direction = 'right';
@@ -26,12 +26,12 @@ window.addEventListener('keydown', (event) => {
 });
 
 new p5(function(closure) {
-  const snakeField = new Field(closure, {width: 10, height: 10});
-  const snake = new Snake({maxHorizontal: 10, maxVertical: 10});
+  const snakeField = new Field(closure, {width: 50, height: 50});
+  const snake = new Snake({maxHorizontal: 50, maxVertical: 50});
   snakeField.setSnake(snake);
 
   closure.setup = () => {
-    closure.createCanvas(100, 100);
+    closure.createCanvas(500, 500);
     closure.frameRate(10);
   }
   
