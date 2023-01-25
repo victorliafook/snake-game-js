@@ -41,9 +41,14 @@ new p5(function(closure) {
   }
   
   closure.draw = () => {
+    snakeField.draw();
+    
     if (snake.isAlive()) {
       snake.move(game.direction);
+    } else {
+      closure.textSize(70);
+      closure.fill(0, 0, 0);
+      closure.text('GAME OVER', 40, 230);
     }
-    snakeField.draw();
   };
 }, document.getElementById('main-canvas'));

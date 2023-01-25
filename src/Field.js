@@ -14,7 +14,7 @@ function Field(drawer, config = {}) {
         if (hasSnake(i, j) || this.hasFood(i, j)) {
           drawer.fill(0);
         } else {
-          drawer.fill(255);
+          drawer.fill(50, 250, 50);
         }
         cont++;
         drawer.square(i * squareSide, j * squareSide, squareSide);

@@ -8,10 +8,14 @@ describe('Field class tests', () => {
     };
     const drawerMock = getDrawerMock();
     spyOn(drawerMock, 'rect');
+    spyOn(drawerMock, 'fill');
+    
     const field = new Field(drawerMock, config);
     field.draw();
 
     const expectedSquareSide = 10;
+    const expectedFillRgbColour = [50, 250, 50];
+    expect(drawerMock.fill).toHaveBeenCalledWith(...expectedFillRgbColour);
     expect(drawerMock.rect).toHaveBeenCalledWith(0, 0, config.width * expectedSquareSide, config.height * expectedSquareSide);
   });
 
@@ -135,6 +139,7 @@ describe('Field class tests', () => {
       'rect': () => {},
       'square': () => {},
       'fill': () => {},
+      'stroke': () => {},
     };
   }
 });
