@@ -9,16 +9,20 @@ const game = {
 window.addEventListener('keydown', (event) => {
   switch(event.key) {
     case 'ArrowUp':
-      game.direction = 'down';
+      if (game.direction !== 'up')
+        game.direction = 'down';
       break;
     case 'ArrowLeft':
-      game.direction = 'left';
+      if (game.direction !== 'right')
+        game.direction = 'left';
       break;
     case 'ArrowDown':
-      game.direction = 'up';
+      if (game.direction !== 'down')
+        game.direction = 'up';
       break;
     case 'ArrowRight':
-      game.direction = 'right';
+      if (game.direction !== 'left')
+        game.direction = 'right';
       break;
     default:
       break;
@@ -37,7 +41,9 @@ new p5(function(closure) {
   }
   
   closure.draw = () => {
-    snake.move(game.direction);
+    if (snake.isAlive()) {
+      snake.move(game.direction);
+    }
     snakeField.draw();
   };
 }, document.getElementById('main-canvas'));
