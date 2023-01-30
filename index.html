@@ -5,8 +5,11 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>
-            .inner-container { margin: 0 auto; width: 800px }
-            .inner-container .game { margin: 5px 0 0; }
+            .inner-container { margin: 0 auto; width: 500px }
+            .inner-container .game { 
+                margin: 5px auto 0;
+                width: fit-content;
+            }
         </style>
     </head>
 
@@ -14,7 +17,8 @@
         <div class="outer-container">
             <div class="inner-container">
                 <h1>Snake Game</h1>
-                <span>Use keyboard directionals</span>
+                <span><b>Instructions:</b></span>
+                <span>Use keyboard directionals to controle the snake. Eat the food and avoid hitting itself.</span>
                 <div id="main-canvas" class="game"></div>
                 <div>
 
