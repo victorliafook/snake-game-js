@@ -1,28 +1,35 @@
 const p5 = require('p5');
+const GameLoop = require('../src/GameLoop');
 const Field = require('../src/Field');
 const Snake = require('./Snake');
 
-const game = {
-  direction: 'up',
+// const games = {
+//   direction: 'right',
+// };
+
+const gameConfig = {
+  size: 500,
+  speed: 20,
 };
+const game = new GameLoop(gameConfig);
 
 window.addEventListener('keydown', (event) => {
   switch(event.key) {
     case 'ArrowUp':
-      if (game.direction !== 'up')
-        game.direction = 'down';
+      if (game.getDirection() !== 'up')
+        game.setDirection('down');
       break;
     case 'ArrowLeft':
-      if (game.direction !== 'right')
-        game.direction = 'left';
+      if (game.getDirection() !== 'right')
+        game.setDirection('left');
       break;
     case 'ArrowDown':
-      if (game.direction !== 'down')
-        game.direction = 'up';
+      if (game.getDirection() !== 'down')
+        game.setDirection('up');
       break;
     case 'ArrowRight':
-      if (game.direction !== 'left')
-        game.direction = 'right';
+      if (game.getDirection() !== 'left')
+        game.setDirection('right');
       break;
     default:
       break;
@@ -35,16 +42,14 @@ new p5(function(closure) {
   snakeField.setSnake(snake);
   snake.setField(snakeField);
 
-  closure.setup = () => {
-    closure.createCanvas(500, 500);
-    closure.frameRate(10);
-  }
+  game.setDrawer(closure);
+  closure.setup = game.setup;
   
   closure.draw = () => {
     snakeField.draw();
     
     if (snake.isAlive()) {
-      snake.move(game.direction);
+      snake.move(game.getDirection());
     } else {
       closure.textSize(70);
       closure.fill(0, 0, 0);
