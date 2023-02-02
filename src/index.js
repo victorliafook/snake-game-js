@@ -1,17 +1,29 @@
 const p5 = require('p5');
 const GameLoop = require('../src/GameLoop');
 const Field = require('../src/Field');
-const Snake = require('./Snake');
-
-// const games = {
-//   direction: 'right',
-// };
+const Snake = require('../src/Snake');
+const Screens = require('../src/Screens');
 
 const gameConfig = {
   size: 500,
   speed: 20,
 };
 const game = new GameLoop(gameConfig);
+
+new p5(function(closure) {
+  const snakeField = new Field(closure, {width: 50, height: 50});
+  const snake = new Snake({maxHorizontal: 50, maxVertical: 50});
+  const screens = new Screens(closure);
+
+  game.setDrawer(closure);
+  game.setField(snakeField);
+  game.setSnake(snake);
+  game.setScreens(screens);
+  
+  closure.setup = game.setup;
+  closure.draw = game.update;
+
+}, document.getElementById('main-canvas'));
 
 window.addEventListener('keydown', (event) => {
   switch(event.key) {
@@ -35,25 +47,3 @@ window.addEventListener('keydown', (event) => {
       break;
   }
 });
-
-new p5(function(closure) {
-  const snakeField = new Field(closure, {width: 50, height: 50});
-  const snake = new Snake({maxHorizontal: 50, maxVertical: 50});
-  snakeField.setSnake(snake);
-  snake.setField(snakeField);
-
-  game.setDrawer(closure);
-  closure.setup = game.setup;
-  
-  closure.draw = () => {
-    snakeField.draw();
-    
-    if (snake.isAlive()) {
-      snake.move(game.getDirection());
-    } else {
-      closure.textSize(70);
-      closure.fill(0, 0, 0);
-      closure.text('GAME OVER', 40, 230);
-    }
-  };
-}, document.getElementById('main-canvas'));
