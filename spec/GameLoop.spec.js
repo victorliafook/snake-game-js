@@ -96,6 +96,18 @@ describe('GameLoop class tests', () => {
   });
 
   describe('update function', () => {
+    it('clears drawing upon update loop', () => {
+      const game = new GameLoop({});
+      const drawerMock = {
+        clear: () => {},
+      };
+      spyOn(drawerMock, 'clear');
+      game.setDrawer(drawerMock);
+
+      game.update();
+      expect(drawerMock.clear).toHaveBeenCalledTimes(1);
+    });
+
     it('draws field', () => {
       const game = new GameLoop({});
       const fieldMock = {
@@ -120,6 +132,33 @@ describe('GameLoop class tests', () => {
 
       game.update();
       expect(snakeMock.move).toHaveBeenCalledTimes(1);
+    });
+
+    it('sets status\' score as per snake length increment and draws it', () => {
+      const game = new GameLoop({});
+      const snakeMock = {
+        getLength: () => {},
+        getInitialLength: () => {},
+        isAlive: () => {},
+      };
+      const stubSnakeLength = Math.floor(Math.random() * 100) + 50;
+      const stubSnakeInitialLength = Math.floor(Math.random() * 50);
+
+      spyOn(snakeMock, 'getLength').and.returnValue(stubSnakeLength);
+      spyOn(snakeMock, 'getInitialLength').and.returnValue(stubSnakeInitialLength);
+      game.setSnake(snakeMock);
+
+      const statsMock = {
+        setScore: () => {},
+        draw: () => {},
+      };
+      game.setStats(statsMock);
+      spyOn(statsMock, 'setScore');
+      spyOn(statsMock, 'draw');
+
+      game.update();
+      expect(statsMock.setScore).toHaveBeenCalledOnceWith(stubSnakeLength - stubSnakeInitialLength);
+      expect(statsMock.draw).toHaveBeenCalledTimes(1);
     });
 
     it('shows GAME OVER screen if snake is dead', () => {

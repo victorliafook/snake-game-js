@@ -7,6 +7,7 @@ describe('Snake class tests', () => {
   it(`snake starts with length ${expectedInitialSnakeLength}`, () => {
     const snake = new Snake();
     expect(snake.getLength()).toBe(expectedInitialSnakeLength);
+    expect(snake.getInitialLength()).toBe(expectedInitialSnakeLength);
   });
 
   it(`snake starts with heat at position ${expectedInitialHeadPosition.x}, ${expectedInitialHeadPosition.y}`, () => {

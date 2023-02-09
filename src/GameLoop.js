@@ -4,22 +4,27 @@ function GameLoop(config = {}) {
 
   let direction = 'right';
   let screens = null;
+  let stats = null;
   let drawer = null;
   let field = null;
   let snake = null;
 
   this.setup = () => {
-    drawer.createCanvas(size, size);
+    const canvasHeight = size + (stats?.getPanelHeight() ?? 0);
+    drawer.createCanvas(size, canvasHeight);
     drawer.frameRate(speed);
   };
 
   this.update = () => {
+    drawer?.clear();
     field && field.draw();
     if (snake?.isAlive()) {
       snake.move(direction);
     } else {
       screens?.showGameOver();
     }
+    stats?.setScore(snake.getLength() - snake.getInitialLength());
+    stats?.draw();
   };
 
   this.setDrawer = (p5Closure) => {
@@ -28,6 +33,10 @@ function GameLoop(config = {}) {
 
   this.setScreens = (screensInput) => {
     screens = screensInput;
+  };
+
+  this.setStats = (statsInput) => {
+    stats = statsInput;
   };
 
   this.setDirection = (inputDirection) => {

@@ -14,6 +14,10 @@ function Snake(config = {}) {
     return snakeSegments.length;
   };
 
+  this.getInitialLength = () => {
+    return initialLength;
+  };
+
   this.getHead = () => {
     return { ...head };
   };

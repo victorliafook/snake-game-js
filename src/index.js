@@ -3,6 +3,7 @@ const GameLoop = require('../src/GameLoop');
 const Field = require('../src/Field');
 const Snake = require('../src/Snake');
 const Screens = require('../src/Screens');
+const Stats = require('./Stats');
 
 const gameConfig = {
   size: 500,
@@ -14,11 +15,13 @@ new p5(function(closure) {
   const snakeField = new Field(closure, {width: 50, height: 50});
   const snake = new Snake({maxHorizontal: 50, maxVertical: 50});
   const screens = new Screens(closure);
+  const statsDisplay = new Stats(closure);
 
   game.setDrawer(closure);
   game.setField(snakeField);
   game.setSnake(snake);
   game.setScreens(screens);
+  game.setStats(statsDisplay);
   
   closure.setup = game.setup;
   closure.draw = game.update;
