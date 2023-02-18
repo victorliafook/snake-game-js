@@ -1,4 +1,4 @@
-const Snake = require('../src/Snake');
+const Snake = require('../src/gameElements/Snake');
 
 const expectedInitialSnakeLength = 3;
 const expectedInitialHeadPosition = { x: 5, y: 5 };

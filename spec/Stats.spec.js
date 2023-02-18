@@ -1,4 +1,4 @@
-const Stats = require('../src/Stats');
+const Stats = require('../src/gameElements/Stats');
 
 const EXPECTED_PANEL_HEIGHT = 100;
 const DEFAULT_PANEL_PADDING = 500;

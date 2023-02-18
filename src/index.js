@@ -1,9 +1,9 @@
 const p5 = require('p5');
 const GameLoop = require('../src/GameLoop');
-const Field = require('../src/Field');
-const Snake = require('../src/Snake');
-const Screens = require('../src/Screens');
-const Stats = require('./Stats');
+const Field = require('./gameElements/Field');
+const Snake = require('./gameElements/Snake');
+const Screens = require('./gameElements/Screens');
+const Stats = require('./gameElements/Stats');
 require('../styles/main.css');
 require('../styles/controls.css');
 

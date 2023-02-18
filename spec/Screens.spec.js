@@ -1,4 +1,4 @@
-const Screens = require('../src/Screens');
+const Screens = require('../src/gameElements/Screens');
 
 describe('Screens class tests', () => {
   it('can draw the game over screen', () => {

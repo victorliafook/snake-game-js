@@ -1,4 +1,4 @@
-const Field = require('../src/Field');
+const Field = require('../src/gameElements/Field');
 
 describe('Field class tests', () => {
   it('draws the field with right dimensions', () => {
