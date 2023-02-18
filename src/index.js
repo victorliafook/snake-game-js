@@ -4,6 +4,8 @@ const Field = require('../src/Field');
 const Snake = require('../src/Snake');
 const Screens = require('../src/Screens');
 const Stats = require('./Stats');
+require('../styles/main.css');
+require('../styles/controls.css');
 
 const gameConfig = {
   size: 500,
@@ -28,8 +30,8 @@ new p5(function(closure) {
 
 }, document.getElementById('main-canvas'));
 
-window.addEventListener('keydown', (event) => {
-  switch(event.key) {
+const directionalEventHandler = (event) => {
+  switch(event) {
     case 'ArrowUp':
       if (game.getDirection() !== 'up')
         game.setDirection('down');
@@ -49,4 +51,22 @@ window.addEventListener('keydown', (event) => {
     default:
       break;
   }
+};
+
+window.addEventListener('keydown', (event) => directionalEventHandler(event.key));
+
+document.querySelector('#controls #up').addEventListener('click', (e) => {
+  directionalEventHandler('ArrowUp');
+});
+
+document.querySelector('#controls #left').addEventListener('click', () => {
+  directionalEventHandler('ArrowLeft');
+});
+
+document.querySelector('#controls #right').addEventListener('click', () => {
+  directionalEventHandler('ArrowRight');
+});
+
+document.querySelector('#controls #down').addEventListener('click', () => {
+  directionalEventHandler('ArrowDown');
 });

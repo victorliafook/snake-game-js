@@ -4,13 +4,6 @@
         <title>Snake Game in JS</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
-            .inner-container { margin: 0 auto; width: 500px }
-            .inner-container .game { 
-                margin: 5px auto 0;
-                width: fit-content;
-            }
-        </style>
     </head>
 
     <body>
@@ -18,10 +11,15 @@
             <div class="inner-container">
                 <h1>Snake Game</h1>
                 <span><b>Instructions:</b></span>
-                <span>Use keyboard directionals to controle the snake. Eat the food and avoid hitting itself.</span>
+                <span>Use keyboard directionals or tap arrows to control the snake. Eat the food and avoid hitting itself.</span>
                 <div id="main-canvas" class="game"></div>
                 <div>
-
+                    <div id="controls">
+                        <div id="up"><span>➤</span></div>
+                        <div id="left"><span>➤</span></div>
+                        <div id="right"><span>➤</span></div>
+                        <div id="down"><span>➤</span></div>
+                    </div>
                 </div>
                 <script src="dist/bundle.js"></script>
             </div>

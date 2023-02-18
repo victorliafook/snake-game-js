@@ -1,0 +1,30 @@
+#controls {
+  font-size: 60px;
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
+}
+
+#controls span {
+  display: inline-flex;
+  font-family: sans-serif;
+}
+
+#controls #left, #right {
+  width: 50%;
+  float: left;
+}
+
+#up span {
+  rotate: 270deg;
+}
+
+#left span {
+  rotate: 180deg;
+}
+
+#right span {}
+
+#down span {
+  rotate: 90deg;
+}

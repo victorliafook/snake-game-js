@@ -1,0 +1,9 @@
+.inner-container {
+  margin: 0 auto;
+  width: 500px
+}
+
+.inner-container .game {
+  margin: 5px auto 0;
+  width: fit-content;
+}
